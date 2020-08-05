@@ -1,5 +1,7 @@
 # Resumão
 
+> Início da primeira aula
+
 ## 1.a - Início do projeto e instalação das dependências (começando do zero)
 
 `npm init -y`
@@ -16,7 +18,7 @@
 
 `server.js`
 
-```Javascript
+```JavaScript
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -269,6 +271,8 @@ router.get('/:userId', (req, res, next)=> {
     }
 })
 ```
+
+> Fim da primeira aula
 
 ## 13 - Criar a classe de usuários `models/usuario.js`
 
