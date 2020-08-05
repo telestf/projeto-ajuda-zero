@@ -269,3 +269,25 @@ router.get('/:userId', (req, res, next)=> {
     }
 })
 ```
+
+## 13 - Criar a classe de usuários `models/usuario.js`
+
+`usuario.js`
+
+```Javascript
+class Usuario {
+    constructor(id, email, nome){
+        this.id = id
+        this.email = email
+        this.nome = nome
+    }
+}
+
+let listaUsuario = []
+
+listaUsuario.push(new Usuario(1, "son.goku@dbz.com", "Son Goku"))
+listaUsuario.push(new Usuario(2, "son.gohan@dbz.com", "Son Gohan"))
+listaUsuario.push(new Usuario(3, "bulma.briefs@dbz.com", "Bulma Briefs"))
+
+module.exports = listaUsuario;
+```
