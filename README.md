@@ -2,15 +2,15 @@
 
 ## 1 - Início do projeto e instalação das dependências
 
-`npm init`
+`npm init -y`
 `npm install express`
-`npm install nodemon`
+`npm install nodemon -D`
 
 ## 2 - Criar o JS
 
 `server.js`
 
-~~~Javascript
+```Javascript
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -25,7 +25,7 @@ app.get('/', (req, res) =>{
 })
 
 app.listen(PORT, () => {console.log(`App rodando na porta ${PORT}`)})
-~~~
+```
 
 ## 3 - Criar o HTML
 
