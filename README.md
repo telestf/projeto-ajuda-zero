@@ -1,12 +1,16 @@
 # Resumão
 
-## 1 - Início do projeto e instalação das dependências
+## 1.a - Início do projeto e instalação das dependências (começando do zero)
 
 `npm init -y`
 
 `npm install express`
 
 `npm install nodemon -D`
+
+## 1.b - Início do projeto e instalação das dependências (fazendo clone/fork do repositório)
+
+`npm install`
 
 ## 2 - Criar o JS
 
