@@ -10,7 +10,7 @@
 
 `server.js`
 
-```Javascript
+~~~Javascript
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -31,7 +31,7 @@ app.listen(PORT, () => {console.log(`App rodando na porta ${PORT}`)})
 
 `index.html`
 
-```HTML
+~~~HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,9 +67,7 @@ app.listen(PORT, () => {console.log(`App rodando na porta ${PORT}`)})
 
 ## 5 - Criar métodos GET e POST do formulário
 
--[] Criar `usuario.js`
-
-`usuario.js`
+`server.js`
 
 ```Javascript
 app.get('/form', (req, res) =>{
@@ -168,7 +166,7 @@ router.post('/', (req, res, next)=> {
 module.exports = router
 ```
 
-## 8 - Criar lista de usuarios
+## 9 - Criar lista de usuarios
 
 -[] Criar pasta `models`
 -[] Criar `usuario.js` dentro da pasta `models`
@@ -197,7 +195,7 @@ const listaUsuarios = [
 module.exports = listaUsuarios;
 ```
 
-## 9 - Utilizar a lista na API
+## 10 - Utilizar a lista na API
 
 -[] Importar a lista no `usuario.js` dentro de `routes/api` e atualizar o método GET
 
@@ -217,7 +215,7 @@ router.get('/', (req, res, next) => {
 })
 ```
 
-## 10 - Atualizar o método POST
+## 11 - Atualizar o método POST
 
 `usuario.js`
 
@@ -246,7 +244,7 @@ router.post('/', (req, res, next) => {
 })
 ```
 
-## 11 - Criar método de pegar um usuário em específico
+## 12 - Criar método de pegar um usuário em específico
 
 `usuario.js`
 
