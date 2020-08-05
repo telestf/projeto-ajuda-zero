@@ -3,7 +3,9 @@
 ## 1 - Início do projeto e instalação das dependências
 
 `npm init -y`
+
 `npm install express`
+
 `npm install nodemon -D`
 
 ## 2 - Criar o JS
@@ -97,10 +99,10 @@ app.post('/form', (req, res, next)=> {
 
 ## 7 - Criar rotas
 
--[] Criar pasta `routes`
--[] Criar pasta `api` dentro de `routes`
--[] Mover o código do `server.js`para dentro de `usuario.js`
--[] Atualizar código do `server.js`
+* Criar pasta `routes`
+* Criar pasta `api` dentro de `routes`
+* Mover o código do `server.js`para dentro de `usuario.js`
+* Atualizar código do `server.js`
 
 `server.js`
 
@@ -168,8 +170,8 @@ module.exports = router
 
 ## 9 - Criar lista de usuarios
 
--[] Criar pasta `models`
--[] Criar `usuario.js` dentro da pasta `models`
+* Criar pasta `models`
+* Criar `usuario.js` dentro da pasta `models`
 
 `usuario.js`
 
@@ -197,7 +199,7 @@ module.exports = listaUsuarios;
 
 ## 10 - Utilizar a lista na API
 
--[] Importar a lista no `usuario.js` dentro de `routes/api` e atualizar o método GET
+* Importar a lista no `usuario.js` dentro de `routes/api` e atualizar o método GET
 
 `usuario.js`
 
