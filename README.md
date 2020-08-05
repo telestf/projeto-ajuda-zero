@@ -25,13 +25,13 @@ app.get('/', (req, res) =>{
 })
 
 app.listen(PORT, () => {console.log(`App rodando na porta ${PORT}`)})
-```
+~~~
 
 ## 3 - Criar o HTML
 
 `index.html`
 
-~~~HTML
+```HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
