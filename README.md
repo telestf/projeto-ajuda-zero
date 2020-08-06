@@ -365,6 +365,8 @@ router.put('/:userId' , (req, res) => {
 
 ## 16 - Método PATCH
 
+`routes/api/usuario.js`
+
 ```Javascript
 router.patch('/:userId', (req, res, next)=> {
 try{
@@ -390,6 +392,8 @@ try{
 ```
 
 ## 17 - Método DELETE
+
+`routes/api/usuario.js`
 
 ```Javascript
 router.delete('/:userId', (req, res, next)=> {
