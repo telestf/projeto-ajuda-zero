@@ -340,7 +340,7 @@ router.post('/', [], (req, res) => {
 })
 ```
 
-## 15 - Método Put
+## 15 - Método PUT
 
 `routes/api/usuario.js`
 
@@ -362,3 +362,32 @@ router.put('/:userId' , (req, res) => {
     }
 })
 ```
+
+## 16 - Método PATCH
+
+```Javascript
+router.patch('/:userId', (req, res, next)=> {
+try{
+    let usuario =  listaUsuarios.filter(u => u.id == req.params["userId"])
+    if (usuario.length > 0){
+        usuario = usuario[0]
+        let {email, nome} = req.body
+        if (email) {
+            usuario.email = email
+        }
+        if (nome) {
+            usuario.nome = nome
+        }
+        res.send(usuario)
+    } else {
+        res.status(404).send({"error" : "User not exist"})
+    }
+} catch(err){
+    console.error(err.message)
+    res.status(500).send({"error" : "Server Error"})
+}
+})
+```
+
+## 17 - Método DELETE
+
