@@ -311,7 +311,7 @@ module.exports = { Usuario, listaUsuarios }
 `routes/api/usuario.js`
 
 ```Javascript
-const { Usuario, listaUsuarios } = require('../../models/user')
+var { Usuario, listaUsuarios } = require('../../models/user')
 ```
 
 * Instanciar e "pushar"
