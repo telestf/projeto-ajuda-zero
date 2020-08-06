@@ -391,3 +391,19 @@ try{
 
 ## 17 - Método DELETE
 
+```Javascript
+router.delete('/:userId', (req, res, next)=> {
+    try{
+      let usuario = listaUsuarios.filter(u => u.id == req.params["userId"])
+      if (usuario.length > 0){
+        listaUsuarios =  listaUsuarios.filter(u => u.id != req.params["userId"])
+        res.send(listaUsuarios)
+      }else{
+        res.status(404).send({"error" : "User not exist"})
+      }
+    }catch(err){
+      console.error(err.message)
+      res.status(500).send({"error" : "Server Error"})
+    }
+})
+```
