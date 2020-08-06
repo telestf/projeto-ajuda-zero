@@ -291,3 +291,45 @@ listaUsuario.push(new Usuario(3, "bulma.briefs@dbz.com", "Bulma Briefs"))
 
 module.exports = listaUsuario;
 ```
+
+## 14 - Usar uma instância de classe para dar POST
+
+* Exportar a classe Usuário
+
+`models/usuario.js`
+
+```Javascript
+module.exports = { Usuario, listaUsuarios }
+```
+
+* Importar a classe
+
+`routes/api/usuario.js`
+
+```Javascript
+const { Usuario, listaUsuarios } = require('../../models/user')
+```
+
+* Instanciar e "pushar"
+
+```Javascript
+router.post('/', (req, res) => {  
+    try {
+        let {email, nome} = req.body
+        let usuario = new Usuario(id=0, email=email, nome=nome)
+
+        if (!email){
+            res.status(400).res.send({"err" : "Coé doido, esqueceu o email?"})
+        } else if (!nome) {
+            res.status(400).res.send({"err" : "Coé doido, esqueceu o nome?"})
+        } else {
+            usuario.id = listaUsuarios[listaUsuarios.length-1].id +1
+            listaUsuarios.push(usuario)
+            console.log(`Tá rodando! Você inseriu: ${nome} ${email}`)
+            res.send(listaUsuarios)
+        }
+    } catch(err) {
+        res.status(500).send({"err" : "Server Error"})
+    }
+})
+```
