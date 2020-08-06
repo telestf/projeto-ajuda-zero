@@ -316,8 +316,10 @@ const { Usuario, listaUsuarios } = require('../../models/user')
 
 * Instanciar e "pushar"
 
+`routes/api/usuario.js`
+
 ```Javascript
-router.post('/', (req, res) => {  
+router.post('/', [], (req, res) => {  
     try {
         let {email, nome} = req.body
         let usuario = new Usuario(id=0, email=email, nome=nome)
@@ -331,6 +333,29 @@ router.post('/', (req, res) => {
             listaUsuarios.push(usuario)
             console.log(`Tá rodando! Você inseriu: ${nome} ${email}`)
             res.send(listaUsuarios)
+        }
+    } catch(err) {
+        res.status(500).send({"err" : "Server Error"})
+    }
+})
+```
+
+## 15 - Método Put
+
+`routes/api/usuario.js`
+
+```Javascript
+router.put('/:userId' , (req, res) => {
+    try {
+        let usuario = listaUsuarios.filter(u => u.id == req.params["userId"])
+        if (usuario.length > 0) {
+            usuario = usuario[0]
+            let {email, nome} = req.body
+            usuario.email = email
+            usuario.nome = nome
+            res.send(usuario)
+        } else {
+            res.status(404).send({"err" : "Usuário não existe, pooo"})
         }
     } catch(err) {
         res.status(500).send({"err" : "Server Error"})
