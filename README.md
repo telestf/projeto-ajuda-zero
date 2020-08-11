@@ -236,9 +236,9 @@ router.post('/', (req, res, next) => {
         usuario.nome = nome
 
         if (!email){
-            res.status(400).res.send({"erro" : "Cadê o email?"})
+            res.status(400).send({"erro" : "Cadê o email?"})
         } else if (!nome){
-            res.status(400).res.send({"erro" : "Cadê o nome?"})
+            res.status(400).send({"erro" : "Cadê o nome?"})
         } else  {
             usuario.id = listaUsuarios[listaUsuarios.length-1].id + 1
             listaUsuarios.push(usuario)
@@ -274,9 +274,9 @@ router.get('/:userId', (req, res, next)=> {
 
 > Fim da primeira aula
 
-## 13 - Criar a classe de usuários `models/usuario.js`
+## 13 - Criar a classe de usuários
 
-`usuario.js`
+`models/usuario.js`
 
 ```Javascript
 class Usuario {
@@ -314,7 +314,7 @@ module.exports = { Usuario, listaUsuarios }
 var { Usuario, listaUsuarios } = require('../../models/user')
 ```
 
-* Instanciar e "pushar"
+* Atualizar o método POST
 
 `routes/api/usuario.js`
 
@@ -325,9 +325,9 @@ router.post('/', [], (req, res) => {
         let usuario = new Usuario(id=0, email=email, nome=nome)
 
         if (!email){
-            res.status(400).res.send({"err" : "Coé doido, esqueceu o email?"})
+            res.status(400).send({"err" : "Coé doido, esqueceu o email?"})
         } else if (!nome) {
-            res.status(400).res.send({"err" : "Coé doido, esqueceu o nome?"})
+            res.status(400).send({"err" : "Coé doido, esqueceu o nome?"})
         } else {
             usuario.id = listaUsuarios[listaUsuarios.length-1].id +1
             listaUsuarios.push(usuario)
@@ -369,25 +369,25 @@ router.put('/:userId' , (req, res) => {
 
 ```Javascript
 router.patch('/:userId', (req, res, next)=> {
-try{
-    let usuario =  listaUsuarios.filter(u => u.id == req.params["userId"])
-    if (usuario.length > 0){
-        usuario = usuario[0]
-        let {email, nome} = req.body
-        if (email) {
-            usuario.email = email
+    try{
+        let usuario =  listaUsuarios.filter(u => u.id == req.params["userId"])
+        if (usuario.length > 0){
+            usuario = usuario[0]
+            let {email, nome} = req.body
+            if (email) {
+                usuario.email = email
+            }
+            if (nome) {
+                usuario.nome = nome
+            }
+            res.send(usuario)
+        } else {
+            res.status(404).send({"error" : "User not exist"})
         }
-        if (nome) {
-            usuario.nome = nome
-        }
-        res.send(usuario)
-    } else {
-        res.status(404).send({"error" : "User not exist"})
+    } catch(err){
+        console.error(err.message)
+        res.status(500).send({"error" : "Server Error"})
     }
-} catch(err){
-    console.error(err.message)
-    res.status(500).send({"error" : "Server Error"})
-}
 })
 ```
 
@@ -413,3 +413,196 @@ router.delete('/:userId', (req, res, next)=> {
 ```
 
 ## 18 - Métodos de Classe
+
+* Atualizar o modelo
+
+`models/usuario.js`
+
+```Javascript
+class Usuario {
+    constructor(email, nome){
+        this.id = this.gerarId()
+        this.email = email
+        this.nome = nome
+    }
+
+    gerarId() {
+        if (lista_usuarios.length === 0){
+            return 1
+        }
+        return lista_usuarios[lista_usuarios.length-1].id + 1
+}
+
+let listaUsuario = []
+
+listaUsuario.push(new Usuario("son.goku@dbz.com", "Son Goku"))
+listaUsuario.push(new Usuario("son.gohan@dbz.com", "Son Gohan"))
+listaUsuario.push(new Usuario("bulma.briefs@dbz.com", "Bulma Briefs"))
+
+module.exports = { Usuario, listaUsuario };
+```
+
+* Atualizar os métodos na API
+
+`routes/api/usuario.js`
+
+* POST
+
+```Javascript
+router.post('/', [], (req, res) => {  
+    try {
+        let {email, nome} = req.body
+
+        if (!email){
+            res.status(400).send({"err" : "Coé doido, esqueceu o email?"})
+        } else if (!nome) {
+            res.status(400).send({"err" : "Coé doido, esqueceu o nome?"})
+        } else {
+            let usuario = new Usuario(email=email, nome=nome)
+            listaUsuarios.push(usuario)
+            console.log(`Tá rodando! Você inseriu: ${nome} ${email}`)
+            res.send(listaUsuarios)
+        }
+    } catch(err) {
+        res.status(500).send({"err" : "Server Error"})
+    }
+})
+```
+
+* PUT
+
+```Javascript
+router.put('/:userId' , (req, res) => {
+    try {
+        let usuario = listaUsuarios.filter(u => u.id == req.params["userId"])
+        if (usuario.length > 0) {
+            usuario = usuario[0]
+            let {email, nome} = req.body
+            if (!email){
+                res.status(400).send({"err" : "Coé doido, esqueceu o email?"})
+            } else if (!nome) {
+                res.status(400).send({"err" : "Coé doido, esqueceu o nome?"})
+            } else {
+                usuario.email = email
+                usuario.nome = nome
+                res.send(usuario)
+            }
+        } else {
+            res.status(404).send({"err" : "Usuário não existe, pooo"})
+        }
+    } catch(err) {
+        res.status(500).send({"err" : "Server Error"})
+    }
+})
+```
+
+## 19 - Object.entries
+
+`routes/api/usuario.js`
+
+* PATCH
+
+```Javascript
+router.patch('/:userId', (req, res, next)=> {
+    try{
+        let usuario =  listaUsuarios.filter(u => u.id == req.params["userId"])
+        if (usuario.length > 0){
+            usuario = usuario[0]
+            let {email, nome} = req.body
+            for (const [chave, valor] of Object.entries(req.body)) {
+                if (!valor) {
+                    continue
+                }
+                usuario[chave] = valor
+            }
+            res.send(usuario)
+        } else {
+            res.status(404).send({"error" : "User not exist"})
+        }
+    } catch(err){
+        console.error(err.message)
+        res.status(500).send({"error" : "Server Error"})
+    }
+})
+```
+
+* PUT
+
+```Javascript
+router.put('/:userId' , (req, res) => {
+    try {
+        let usuario = listaUsuarios.filter(u => u.id == req.params["userId"])
+        if (usuario.length > 0) {
+            usuario = usuario[0]
+            let {email, nome} = req.body
+            if (!email){
+                res.status(400).send({"err" : "Coé doido, esqueceu o email?"})
+            } else if (!nome) {
+                res.status(400).send({"err" : "Coé doido, esqueceu o nome?"})
+            } else {
+                for (const [chave, valor] of Object.entries(req.body)) {
+                    usuario[chave] = valor
+                }
+                res.send(usuario)
+            }
+        } else {
+            res.status(404).send({"err" : "Usuário não existe, pooo"})
+        }
+    } catch(err) {
+        res.status(500).send({"err" : "Server Error"})
+    }
+})
+```
+
+## 20 - express-validator
+
+`routes/api/usuario.js`
+
+* POST
+
+```Javascript
+router.post('/', [
+        check('email', 'email não é válido').isEmail(),
+        check('nome', 'nome não é válido').isLenght({min : 3}).isAlpha(['pt-BR'])
+], (req, res) => {  
+    try {
+        let {email, nome} = req.body
+        const errors = validationResult(req)
+        if (!errors.isEmpty()){
+            return res.status(400).json({ errors: errors.array() })
+        } else {
+            let usuario = new Usuario(email=email, nome=nome)
+            listaUsuarios.push(usuario)
+            res.send(listaUsuarios)
+
+    } catch(err) {
+        res.status(500).send({"err" : "Server Error"})
+    }
+})
+```
+
+* PUT
+
+```Javascript
+router.put('/', [
+        check('email', 'email não é válido').isEmail(),
+        check('nome', 'nome não é válido').isLenght({min : 3}).isAlpha(['pt-BR'])
+], (req, res) => {
+    try {
+        let usuario =  listaUsuarios.filter(u => u.id == req.params["userId"])
+        if (usuario.length > 0) {
+            usuario = usuario[0]
+            for (const [chave, valor] of Object.entries(req.body)){
+                usuario[chave] = valor
+            }
+            res.send(usuario)
+        } else {
+            res.status(404).send({"error" : "User not exist"})
+        }
+    } catch(err) {
+        res.status(500).send({"error" : "Server Error"})
+    }
+})
+```
+
+## 21 - BCRIPT
