@@ -411,3 +411,5 @@ router.delete('/:userId', (req, res, next)=> {
     }
 })
 ```
+
+## 18 - Métodos de Classe
