@@ -273,6 +273,7 @@ router.get('/:userId', (req, res, next)=> {
 ```
 
 > Fim da primeira aula
+> Início da segunda aula
 
 ## 13 - Criar a classe de usuários
 
