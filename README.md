@@ -10,6 +10,8 @@
 
 `npm install nodemon -D`
 
+`npm install express-validator`
+
 ## 1.b - Início do projeto e instalação das dependências (fazendo clone/fork do repositório)
 
 `npm install`
