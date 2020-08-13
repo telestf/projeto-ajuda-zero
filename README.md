@@ -1,6 +1,6 @@
 # Resumão
 
-> Início da primeira aula
+> _Início da primeira aula_
 
 ## 1.a - Início do projeto e instalação das dependências (começando do zero)
 
@@ -272,9 +272,9 @@ router.get('/:userId', (req, res, next)=> {
 })
 ```
 
-> Fim da primeira aula
-.
-> Início da segunda aula
+> _Fim da primeira aula_
+>
+> _Início da segunda aula_
 
 ## 13 - Criar a classe de usuários
 
@@ -607,4 +607,4 @@ router.put('/', [
 })
 ```
 
-## 21 - BCRIPT
+> _Fim da segunda aula_
