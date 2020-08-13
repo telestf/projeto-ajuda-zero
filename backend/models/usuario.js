@@ -1,19 +1,15 @@
-const listaUsuarios = [
-    {
-        id: 1,
-        email: "son.goku@dbz.com",
-        nome: "Son Goku"
-    },
-    {
-        id: 2,
-        email: "son.gohan@dbz.com",
-        nome: "Son Gohan"
-    },
-    {
-        id: 3,
-        email: "bulma.briefs@dbz.com",
-        nome: "Bulma Briefs"
+class Usuario {
+    constructor(id, email, nome) {
+        this.id = id
+        this.email = email
+        this.nome = nome
     }
-]
+}
 
-module.exports = listaUsuarios
+const listaUsuarios = []
+
+listaUsuarios.push(new Usuario(1, "son.goku@dbz.com", "Son Goku"))
+listaUsuarios.push(new Usuario(id=2, email="son.gohan@dbz.com", nome="Son Gohan"))
+listaUsuarios.push(new Usuario(3, "bulma.briefs@dbz.com", "Bulma Briefs"))
+
+module.exports = { Usuario, listaUsuarios }
